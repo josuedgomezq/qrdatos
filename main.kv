@@ -1,0 +1,62 @@
+
+<MyGridLayout>
+    #:import ZBarCam kivy_garden.zbarcam.ZBarCam 
+    #:import ZBarSymbol pyzbar.pyzbar.ZBarSymbol 
+    zbarcam:zbarcam
+
+
+
+    BoxLayout: 
+        size:root.width, root.height 
+
+        orientation: 'vertical' 
+
+        ZBarCam: 
+
+            id: zbarcam 
+            resolution:(700,700)
+            index:0
+
+            # optional, by default checks all types 
+
+            code_types: ZBarSymbol.QRCODE, ZBarSymbol.EAN13 
+
+        Label: 
+
+            id: name_label
+
+            size_hint: None, None 
+
+            size: self.texture_size[0], 50 
+
+            text: ', '.join([str(symbol.data) for symbol in zbarcam.symbols]) 
+
+        Label: 
+
+            id: registro
+
+            size_hint: None, None 
+
+            size: self.texture_size[0], 50 
+
+            text: 
+
+            
+        Button:
+
+            text:"submit"
+            fonrt_size: 36
+            on_press: root.press()
+            #RGB -A
+            background_color: (0,0,1,1)
+
+        
+        Button:
+
+            text:"Leer"
+            fonrt_size: 36
+            on_press: root.leer()
+            #RGB -A
+            background_color: (0,0,1,1)
+ 
+    
